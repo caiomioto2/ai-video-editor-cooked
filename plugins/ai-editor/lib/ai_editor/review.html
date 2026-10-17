@@ -86,7 +86,7 @@ header{position:relative;height:56px;flex-shrink:0;display:flex;align-items:cent
 #stages>button.done.on{color:var(--ok-text)}
 .status{flex:1 1 0;min-width:0;white-space:nowrap;display:flex;align-items:center;justify-content:flex-end;gap:12px;color:var(--body);font-size:13px;line-height:16px}
 .status i{display:none}
-/* Claude working: a spinner, the step it is on and how long, in ink, so it reads as busy at a glance */
+/* Codex working: a spinner, the step it is on and how long, in ink, so it reads as busy at a glance */
 .status.work{color:var(--ink);font-weight:600}
 .status.work i{display:inline-flex;color:var(--ink);animation:spin .9s linear infinite}
 .status .stp{font-weight:400;color:var(--body)}
@@ -263,7 +263,7 @@ body.preview #pins,body.preview #cmprow{visibility:hidden}
 .mini i{position:absolute;top:0;height:8px;border-radius:2px;background:var(--quiet);cursor:pointer}.mini i.z{background:var(--ink)}
 .mini i:hover{outline:2px solid var(--ink);outline-offset:1px}
 
-/* the panel: notes and Claude's work, the composer and the two buttons at its foot */
+/* the panel: notes and Codex's work, the composer and the two buttons at its foot */
 aside{width:var(--sidew,320px);flex-shrink:0;background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden}
 .phead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:16px 16px 12px;flex-shrink:0;gap:8px}
 .phead>span{color:var(--muted);font-size:13px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -339,7 +339,7 @@ aside{width:var(--sidew,320px);flex-shrink:0;background:var(--panel);border-left
 .rnd b{font-size:14px;line-height:18px;font-weight:600}.rnd .rm span{color:var(--muted);font-size:13px}
 .racts{display:flex;gap:12px;flex-wrap:wrap}
 .racts button{font-size:12px;line-height:16px;color:var(--muted)}.racts button:hover,.racts button.sure{color:var(--ink);text-decoration:underline}
-/* Changed in this round: Claude's answers to the notes, then everything else the round changed; each jumps to its moment */
+/* Changed in this round: Codex's answers to the notes, then everything else the round changed; each jumps to its moment */
 .chhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:4px}
 .chhead b{font-size:13px;line-height:18px;font-weight:600;color:var(--strong)}
 .chg{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;margin:0 -8px;border-radius:8px;text-align:left;font-size:13px;line-height:20px;color:var(--ink2)}
@@ -416,7 +416,7 @@ body.staged #stagebar{display:flex}
 .rcpt.off{color:var(--muted)}.rcpt button{border:0;background:none;padding:0;font:inherit;font-weight:600;color:var(--strong);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 .rcpt button:hover{color:var(--ink)}
 .learn .erow button.go{flex:1}.learn .erow button.go:disabled{opacity:.5}
-/* the Trial reels tab: Claude's plan for re-cuts of the approved reel, one type menu per version */
+/* the Trial reels tab: Codex's plan for re-cuts of the approved reel, one type menu per version */
 body.trtab #box,body.trtab #adds{display:none}body.trtab .pfoot{padding-top:0;border-top:0}   /* Undo approve sits 8px under Skip */
 .tr{display:flex;flex-direction:column;gap:20px}
 .trh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;line-height:16px;font-weight:600;color:var(--muted)}
@@ -525,6 +525,7 @@ body.making #making{display:flex}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style></head><body>
+<aside style="padding:10px 18px;background:var(--bg,#f4f4f4);color:var(--fg,#222);font:14px system-ui;border-bottom:1px solid #aaa">Revisão com Codex: use <b>Salvar feedback</b> e depois escreva <b>leia meu feedback</b> neste chat. Esta página não inicia mensagens no chat automaticamente.</aside>
 <nav class="rail" aria-label="cooked.">
  <div class="rtop"><span class="rtile" title="cooked."><svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><path d="M6 36H46C46 46 40 52 32 52H20C12 52 6 46 6 36Z" fill="currentColor"/><path d="M45 36H58A3 3 0 0 1 58 42H45Z" fill="currentColor"/><path d="M16 29C13 25 19 22 16 17M26 29C23 25 29 22 26 17M36 29C33 25 39 22 36 17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span><span class="rname">cooked.</span>
   <button class="rtog" id="railtog" aria-label="Expand the sidebar" title="Expand the sidebar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M13 10l2 2-2 2"/></svg></button></div>
@@ -549,7 +550,7 @@ body.making #making{display:flex}
 </header>
 <section id="how" aria-label="how this works"><ol>
  <li><b>1. Watch and note</b>Pause where something is off and leave a note. It is pinned to that moment, with the frame. On the edit, click a card, caption or zoom on the video, or select words in the transcript, and the note starts with what it is. Paste or drop an image to show what you mean.</li>
- <li><b>2. Submit feedback to Claude</b>Notes stay here until you press it. Then Claude reads every note and fixes the video. You see each step here while it works. The new draft opens by itself.</li>
+ <li><b>2. Salvar feedback</b>As notas ficam salvas nesta revisão. Depois de salvar, volte ao chat do Codex e escreva: leia meu feedback. O botão não envia uma mensagem automaticamente ao chat.</li>
  <li><b>3. Approve</b>When it is right, approve it. An approved cut gets captions, zooms and sound next. An approved edit is finished, and your notes can teach your style.</li>
 </ol><div id="keys"></div></section>
 
@@ -629,7 +630,7 @@ const viewRound=()=>(S.rounds||[]).find(r=>key(r)===key(view))||S;
 const onAlt=c=>(c.alt||'')===alt||c.alt==='*';   // each video keeps its own notes and pins; '*' = all videos
 const isCur=()=>view&&view.stage===S.stage&&view.round===S.round;
 const approved=st=>{const i=S.events.map(e=>e.type==='approve'&&e.stage===st).lastIndexOf(true);return i>=0&&!S.events.slice(i+1).some(e=>e.type==='stop')};   // Stop while the edit is made takes the approve back
-const pending=()=>{const e=S.events[S.events.length-1];return S.sent&&e?(e.type==='edits'?'send':e.type):null};   // transcript edits: with Claude, like a send
+const pending=()=>{const e=S.events[S.events.length-1];return S.sent&&e?(e.type==='edits'?'send':e.type):null};   // transcript edits: with Codex, like a send
 const editsSent=()=>{const e=S.events[S.events.length-1];return !!(S.sent&&e&&e.type==='edits')};
 let approving=false,landing=0;   // Approve pressed, before the server answers; the edit round arriving (1 = bar green, 2 = toast)
 const makingEdit=s=>{s=s||S;const e=s.events[s.events.length-1];return !!(s.sent&&!s.final&&e&&e.type==='approve'&&(e.stage==='cut'&&s.stage==='cut'||e.stills&&s.stills))};   // final: the cut is the video, no edit follows; the stills approved: the render is being made
@@ -645,7 +646,7 @@ function dn(r,rs){
   if(r.stills){const n=same.filter(x=>x.stills).length||1,more=rs.filter(x=>x.stage===r.stage&&x.stills).length>1;return more?'preview '+n:'the preview'}
   return 'draft '+(same.filter(x=>!x.stills).length||1);
 }
-const nextDn=()=>{const nx={stage:S.stage,round:S.round+1,stills:!!S.stills};return dn(nx,(S.rounds||[]).concat([nx]))};   // the round Claude is making: notes on a preview make the next preview
+const nextDn=()=>{const nx={stage:S.stage,round:S.round+1,stills:!!S.stills};return dn(nx,(S.rounds||[]).concat([nx]))};   // the round Codex is making: notes on a preview make the next preview
 const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
 const rn=r=>r.round===0?'Your clip, before the cut':cap(dn(r));   // round 0: the raw clip, open while the cut is made
 const plural=(n,w)=>n+' '+w+(n===1?'':'s');
@@ -694,7 +695,7 @@ async function load(force){
   setVideo();render();
   if(landing===2){landing=0;toast(S.stills?'The preview is ready':'The edit is ready')}
 }
-// Claude's words reach the page as written. Check output never should ("Render check: 1 FAIL left", "-12.7 LUFS",
+// Codex's words reach the page as written. Check output never should ("Render check: 1 FAIL left", "-12.7 LUFS",
 // "2 frames short (187 of 189)"): those sentences are left out; a few frames short at the end reads as a fixed glitch.
 const DEV=/render check|\bcheck\.py\b|\bFAIL\b|\bWARN\b|LUFS|dBTP|true peak|\bframes?\b[^.]*\b(short|of \d+)/i;
 function plainText(t){
@@ -713,7 +714,7 @@ function plainState(d){
   d.note=plainText(d.note);
   for(const c of d.comments||[])c.reply=plainText(c.reply);
 }
-// Download: the file is checked first (one byte), so a click while Claude is still saving the finished video waits
+// Download: the file is checked first (one byte), so a click while Codex is still saving the finished video waits
 // for it and then saves, instead of a silent failed download. The first click always counts.
 $('dl').addEventListener('click',async e=>{
   e.preventDefault();const a=$('dl'),href=a.href;if(a.dataset.busy)return;a.dataset.busy='1';
@@ -787,33 +788,33 @@ function steps(){
 }
 function listenText(S){
   const e=S.events[S.events.length-1],picked=!!(S.sent&&e&&e.handled);
-  if(picked&&e.type==='approve')return e.stills?'Claude is making the video':e.stage==='cut'?(S.stage==='cut'&&!S.final?'Claude is making the edit':'The cut is approved'):'Approved';
-  if(picked)return S.raw?(S.cut_steps&&S.cut_steps.state==='queued'?((S.cut_steps.claude||{}).opened?'Claude is working in its own Terminal window':'Waiting for Claude'):'Claude is making the cut'):e.type==='edits'?'Claude is applying your changes':'Claude is working on the next draft';
+  if(picked&&e.type==='approve')return e.stills?'Codex is making the video':e.stage==='cut'?(S.stage==='cut'&&!S.final?'Codex is making the edit':'The cut is approved'):'Approved';
+  if(picked)return S.raw?(S.cut_steps&&S.cut_steps.state==='queued'?((S.cut_steps.claude||{}).opened?'Codex is working in its own Terminal window':'Waiting for Codex'):'Codex is making the cut'):e.type==='edits'?'Codex is applying your changes':'Codex is working on the next draft';
   if(S.sent)return e&&e.type==='edits'?'Changes sent':e&&e.type==='approve'?(e.stills?'Preview approved':e.stage==='cut'?'Cut approved':'Approved'):'Notes sent';
   const first=!(S.rounds||[]).some(r=>r.stage===S.stage&&r.round>=1&&r.round<S.round&&!r.stills);   // the first video of the cut or the edit (the stills before it are not one)
-  if(S.listening)return S.round>1&&!S.comments.some(c=>c.stage===S.stage&&c.round===S.round)?(first?(S.stage==='edit'?(S.stills?'The preview is ready':'The edit is ready'):'The cut is ready'):cap(dn(S))+' is ready'):'Claude is listening';
-  if(S.busy)return 'Claude is working. Notes you send now are next.';
-  return 'Claude is not listening. Notes still save.';
+  if(S.listening)return S.round>1&&!S.comments.some(c=>c.stage===S.stage&&c.round===S.round)?(first?(S.stage==='edit'?(S.stills?'The preview is ready':'The edit is ready'):'The cut is ready'):cap(dn(S))+' is ready'):'Codex is listening';
+  if(S.busy)return 'Codex is working. Notes you send now are next.';
+  return 'Notas salvas localmente. Avise neste chat do Codex para aplicar o feedback.';
 }
 function render(){
   if(!S)return;
   document.body.classList.toggle('vertical',!!S.vertical);renderRail();
   const p=pending(),lastEv=S.events[S.events.length-1],picked=!!(S.sent&&lastEv&&lastEv.handled),vr=viewRound();
-  $('name').textContent=S.name;$('name').title=S.name;document.title=S.name+(p==='send'?' · Claude working':' · '+dn(S));steps();
+  $('name').textContent=S.name;$('name').title=S.name;document.title=S.name+(p==='send'?' · Codex working':' · '+dn(S));steps();
   const idleEdit=makingEdit()&&makeState().idle,busyNow=!idleEdit&&(picked&&(p==='send'||!!S.raw)||makingEdit()||approving);
   const nowAct=busyNow&&(S.activity||[]).filter(x=>x.round===S.round&&!x.done).pop();
-  const asking=!!document.documentElement.dataset.ask;   // ask.js: Claude's question box is open on this page
-  $('listen').innerHTML=asking?'<b>Claude is asking you something</b>':esc(approving?(S.stills?'Preview approved':'Cut approved'):idleEdit?'Claude is not working on the edit':listenText(S))+(!asking&&nowAct&&nowAct.text?` <span class="stp">· ${esc(nowAct.text)}</span>`:'');
+  const asking=!!document.documentElement.dataset.ask;   // ask.js: Codex's question box is open on this page
+  $('listen').innerHTML=asking?'<b>Codex is asking you something</b>':esc(approving?(S.stills?'Preview approved':'Cut approved'):idleEdit?'Codex is not working on the edit':listenText(S))+(!asking&&nowAct&&nowAct.text?` <span class="stp">· ${esc(nowAct.text)}</span>`:'');
   $('statusbox').classList.toggle('work',busyNow&&!asking);$('statusbox').querySelector('i').innerHTML=busyNow&&!asking?SPIN:'';
   $('mstage').textContent=STAGE[view.stage];$('msub').textContent=S.name+' · '+rn(view).toLowerCase();
   const mine=S.comments.filter(c=>c.stage===S.stage&&c.round===S.round).length,live=isCur()&&!p;
-  // Send is primary while there are notes; once a round lands with none, Approve is. Stop replaces Send while Claude works.
+  // Send is primary while there are notes; once a round lands with none, Approve is. Stop replaces Send while Codex works.
   const sb=$('send'),ap=$('approve'),working=p==='send'||makingEdit();
   const undoAp=isCur()&&!S.raw&&lastEv&&lastEv.type==='approve';   // an approve can always be taken back
-  sb.classList.toggle('stop',working);sb.querySelector('span').textContent=undoAp?(makingEdit()?'Stop and undo approve':'Undo approve'):working?(S.raw?'Making the cut':'Stop'):mine?`Submit feedback to Claude (${mine})`:'Submit feedback to Claude';
-  sb.className=S.raw?'primary':(mine&&live&&!working?'primary':'')+(working?' stop':'');   // while Claude works nothing is primary: Stop stays quiet
+  sb.classList.toggle('stop',working);sb.querySelector('span').textContent=undoAp?(makingEdit()?'Stop and undo approve':'Undo approve'):working?(S.raw?'Making the cut':'Stop'):mine?`Salvar feedback (${mine})`:'Salvar feedback';
+  sb.className=S.raw?'primary':(mine&&live&&!working?'primary':'')+(working?' stop':'');   // while Codex works nothing is primary: Stop stays quiet
   sb.disabled=undoAp?false:working?!isCur()||!!S.raw:(!live||!mine);
-  sb.title=undoAp?'Go back: this draft opens for notes again.':working?(S.raw?'the first cut is on its way':makingEdit()?'Stop making the edit. The cut opens again.':'Stop Claude working on this draft. Your notes open again.'):'';
+  sb.title=undoAp?'Go back: this draft opens for notes again.':working?(S.raw?'the first cut is on its way':makingEdit()?'Stop making the edit. The cut opens again.':'Stop Codex working on this draft. Your notes open again.'):'';
   const mk=approving||makingEdit();
   ap.textContent=S.stage==='cut'?(S.final?'Approve the cut':'Approve the cut and add captions'):S.stills?'Approve and make the video':(S.alts||[]).length?'Approve all':'Approve the edit';
   ap.className=!working&&live&&!mine?'primary':'';ap.disabled=!!p||!isCur()||mine>0;
@@ -827,7 +828,7 @@ function render(){
   $('mapprove').className=ap.className;$('mapprove').disabled=ap.disabled;$('mapprove').title=ap.title;
   const sbar=isCur()&&S.round>0&&(S.rounds||[]).some(r=>r.stage==='cut');
   document.body.classList.toggle('staged',sbar);
-  $('stagetext').innerHTML=mk?(S.stills?'<b>The preview is approved.</b> Claude is making the video.':'<b>The cut is approved.</b> Claude is adding captions, zooms and sound.')
+  $('stagetext').innerHTML=mk?(S.stills?'<b>The preview is approved.</b> Codex is making the video.':'<b>The cut is approved.</b> Codex is adding captions, zooms and sound.')
     :S.stills&&S.stage==='edit'?'<b>This is the preview.</b> One frame for each card, with captions and zooms, over your sound. Leave notes, or approve it to make the video.'
     :fin?(S.stage==='edit'?'<b>Approved.</b> The edit is finished.':'<b>Approved.</b> The cut is the finished video.')
     :S.stage==='cut'?(S.final?'<b>This is the cut.</b> It is the finished video. Approve it when it is right.':'<b>This is the cut.</b> Captions, zooms and sound come next, once you approve it.'):'<b>This is the edit.</b> Captions, zooms and sound are in. Leave notes or approve.';
@@ -844,7 +845,7 @@ function render(){
   const nv=(vr.alts||[]).length;
   meta();
   $('oldbadge').style.display=isCur()&&!previewOn?'none':'block';$('oldbadge').textContent=previewOn?'Playing your changes':'Older draft, read only';
-  // the composer: open until approve. While Claude works, a note waits for the next round
+  // the composer: open until approve. While Codex works, a note waits for the next round
   const canNote=noteOk();
   ta.disabled=!canNote;box.classList.toggle('off',!canNote);
   ta.placeholder=previewOn?'Back to the cut to leave a note':p==='send'?(S.raw?'Note for the cut...':'Note for the next draft...'):!isCur()?'Older draft, read only':p==='approve'?(S.stills?'The preview is approved':S.stage==='cut'&&!S.final?'The cut is approved':'Approved'):view.round>1?'Feedback on '+dn(viewRound())+' at this moment...':'Type feedback for this moment...';
@@ -852,7 +853,7 @@ function render(){
   if(nv)sc.innerHTML=`<option value="">${esc(lab(alt))} only</option><option value="*">${nv===1?'Both':'All'} versions</option>`;
   renderVer();renderTx();renderBar();renderTracks();renderList();renderAdds();boxTime();hitSig='~';renderHits();
 }
-const noteOk=()=>!!S&&isCur()&&pending()!=='approve'&&!previewOn;   // the composer is open (while Claude works a note waits)
+const noteOk=()=>!!S&&isCur()&&pending()!=='approve'&&!previewOn;   // the composer is open (while Codex works a note waits)
 function meta(){   // "Round 1 · 31s ago", ticked every few seconds so the age stays true
   const p=pending(),vr=viewRound(),nv=(vr.alts||[]).length,mine=S.comments.filter(c=>c.stage===S.stage&&c.round===S.round).length,live=isCur()&&!p,working=p==='send'||makingEdit();
   $('pmeta').textContent=view.round===0?rn(view):live&&mine&&tab==='notes'?plural(mine,'note')+', not sent yet':rn(view)+' · '+(!isCur()?'read only':working?'still plays':p==='approve'?'approved':nv?(nv+1)+' versions':ago(vr.at||S.at||Date.now()));
@@ -865,7 +866,7 @@ function noteCount(){   // "2 done · 1 open" over this round's notes and last r
   return n('fixed')||n('wontfix')?parts.join(' · '):(cs.length||'');
 }
 const here=c=>(c.stage===view.stage&&c.round===view.round)?c.t:(c.new_t??c.t);
-function shown(){   // this round's notes, and last round's pinned where Claude moved them
+function shown(){   // this round's notes, and last round's pinned where Codex moved them
   return S.comments.filter(c=>onAlt(c)&&c.stage===view.stage&&(c.round===view.round||(c.round===view.round-1&&c.new_t!=null&&!c.checked))).sort((a,b)=>here(a)-here(b));
 }
 function bounds(){   // segment starts: chapters on the edit, else the cut points, else one segment
@@ -899,7 +900,7 @@ function renderTracks(){
 function noteHtml(c){
   const old=c.round!==view.round&&!c.queued,t=here(c),live=isCur()&&(!pending()||!!c.queued),nv=(viewRound().alts||[]).length;
   const canEdit=!old&&live&&c.status==='open',ed=canEdit&&editing&&editing.id===c.id;   // review.py editable(): open round or queued
-  const why=canEdit?'':old?`From ${dn(roundOf(c.stage,c.round))}. Leave a new note to change it.`:isCur()&&pending()==='send'?'Claude is working on this draft. Leave a new note for the next one.':pending()==='approve'?'This draft is approved.':'An older draft, read only.';
+  const why=canEdit?'':old?`From ${dn(roundOf(c.stage,c.round))}. Leave a new note to change it.`:isCur()&&pending()==='send'?'Codex is working on this draft. Leave a new note for the next one.':pending()==='approve'?'This draft is approved.':'An older draft, read only.';
   const tm=c.t_end!=null&&!old?fmtx(c.t)+'–'+fmtx(c.t_end):fmtx(t);
   const thumb=old?'':`<img class="thumb${S.vertical?'':' wide'}" src="/frames/${encodeURIComponent(c.frame)}" alt="" loading="lazy">`;
   const imgs=(c.images||[]).length?`<div class="att">${c.images.map((x,i)=>`<a href="/frames/${encodeURIComponent(x)}" target="_blank" rel="noopener"><img src="/frames/${encodeURIComponent(x)}" alt="">Image ${i+1}</a>`).join('')}</div>`:'';
@@ -914,7 +915,7 @@ function noteHtml(c){
   const quote=c.words&&!said?`<span class="q">"${esc(c.words)}"</span>`:'';
   let rep='';
   if(said){const btns=old&&live&&st==='wontfix'?`<button class="obtn" data-anyway="${c.id}">Fix it anyway</button>`:'';
-    rep=(c.reply||moved?`<span class="cr">${c.reply?'Claude: '+esc(c.reply):''}${esc(moved)}</span>`:'')+btns}
+    rep=(c.reply||moved?`<span class="cr">${c.reply?'Codex: '+esc(c.reply):''}${esc(moved)}</span>`:'')+btns}
   const notes=[];
   const keep=c.receipt?rcptHtml(c.receipt):'keep' in c&&!old?(canEdit?`<label class="lrule keep${c.keep?'':' off'}"><input type="checkbox" data-keep="${c.id}"${c.keep?' checked':''}><span>Keep as a rule for ${esc(S.style_name||'your style')}</span></label>`
     :c.keep?`<span class="nmeta">Kept as a rule for ${esc(S.style_name||'your style')}</span>`:''):'';
@@ -939,34 +940,34 @@ function workHtml(){
       :`<li class="todo"><span class="ic"><i></i></span>${esc(m.steps[k])}</li>`).join('')
       +(m.extra?`<li class="now"><span class="ic">${SPIN}</span>${esc(m.extra)}</li>`:'');
     const ok=S.stills?'The preview is approved. ':'The cut is approved. ';
-    return `<div class="claude"><div><b>Claude</b><p>${esc(m.idle?ok+m.idle:ok+(S.stills?'Claude is making the video':'Claude is making the edit')+(m.style?' in '+m.style:'')+'.')}</p></div><ol class="steps">${li}</ol>${m.at&&!m.idle?`<span class="since" data-since="${esc(m.at)}">Working for ${dur((Date.now()-new Date(m.at))/1000)}</span>`:''}</div>`}
-  if(p==='approve')return `<div class="claude"><div><b>Claude</b><p>${S.stage==='cut'?'The cut is approved. It is the finished video.':'Approved. The edit is finished.'}</p></div></div>`+learnHtml();
+    return `<div class="claude"><div><b>Codex</b><p>${esc(m.idle?ok+m.idle:ok+(S.stills?'Codex is making the video':'Codex is making the edit')+(m.style?' in '+m.style:'')+'.')}</p></div><ol class="steps">${li}</ol>${m.at&&!m.idle?`<span class="since" data-since="${esc(m.at)}">Working for ${dur((Date.now()-new Date(m.at))/1000)}</span>`:''}</div>`}
+  if(p==='approve')return `<div class="claude"><div><b>Codex</b><p>${S.stage==='cut'?'The cut is approved. It is the finished video.':'Approved. The edit is finished.'}</p></div></div>`+learnHtml();
   if(S.raw&&S.cut_steps)return cutHtml(S.cut_steps);
-  if(p!=='send'&&(!live||S.stage==='cut'))return '';   // the cut is ready: what Claude does next is the edit's prep, not this round
+  if(p!=='send'&&(!live||S.stage==='cut'))return '';   // the cut is ready: what Codex does next is the edit's prep, not this round
   const ed=editsSent()?S.events[S.events.length-1]:null,nch=ed?plural(ed.n,'transcript change'):'';
-  const head=S.raw?'Making the cut. Your clip plays meanwhile. Notes you leave now go on the cut.':ed?(act.length?`Claude is applying your changes (${nch}). The next draft opens here.`:picked?`Claude has your ${nch} and is starting ${nextDn()}.`:S.listening||S.busy?`${nch} saved. Waiting for Claude to pick them up.`:`${nch} saved, but Claude is not listening. Ask Claude in the terminal to apply them.`):p==='send'?(act.length?`Making ${nextDn()}.`:picked?`Claude has your notes and is starting ${nextDn()}.`:'Notes sent. Waiting for Claude to pick them up.'+(S.listening||!S.busy?'':' Claude is finishing something and takes them next.')):'Still coming in this draft:';
-  if(p!=='send'&&!ed&&!S.raw&&!act.some(x=>x.step||x.pct!=null))   // the draft is out: a plain line from Claude is a remark, not work still coming
-    return `<div class="claude"><div><b>Claude</b>${act.map(x=>`<p>${esc(x.text)}</p>`).join('')}</div></div>`;
+  const head=S.raw?'Making the cut. Your clip plays meanwhile. Notes you leave now go on the cut.':ed?(act.length?`Codex is applying your changes (${nch}). The next draft opens here.`:picked?`Codex has your ${nch} and is starting ${nextDn()}.`:S.listening||S.busy?`${nch} saved. Waiting for Codex to pick them up.`:`${nch} saved, but Codex is not listening. Volte ao chat do Codex e escreva: leia meu feedback.`):p==='send'?(act.length?`Making ${nextDn()}.`:picked?`Codex has your notes and is starting ${nextDn()}.`:'Feedback salvo. Volte ao chat do Codex e escreva: leia meu feedback.'+(S.listening||!S.busy?'':' Codex is finishing something and takes them next.')):'Still coming in this draft:';
+  if(p!=='send'&&!ed&&!S.raw&&!act.some(x=>x.step||x.pct!=null))   // the draft is out: a plain line from Codex is a remark, not work still coming
+    return `<div class="claude"><div><b>Codex</b>${act.map(x=>`<p>${esc(x.text)}</p>`).join('')}</div></div>`;
   const li=act.map(x=>x.done?`<li><span class="ic">${TICK}</span>${esc(x.text)}</li>`
     :`<li class="now"><span class="ic">${SPIN}</span>${esc(x.text)}</li>`+(x.pct!=null?`<li class="pb"><em><i style="width:${x.pct}%"></i></em>${x.pct}%</li>`:'')).join('');
   const sent=e&&e.type==='send'?e.at:null;
-  return `<div class="claude"><div><b>Claude</b><p>${esc(head)}</p></div>${li?`<ol class="steps">${li}</ol>`:''}${sent&&p==='send'?`<span class="since" data-since="${esc(sent)}">Working for ${dur((Date.now()-new Date(sent))/1000)}</span>`:''}</div>`;
+  return `<div class="claude"><div><b>Codex</b><p>${esc(head)}</p></div>${li?`<ol class="steps">${li}</ol>`:''}${sent&&p==='send'?`<span class="since" data-since="${esc(sent)}">Working for ${dur((Date.now()-new Date(sent))/1000)}</span>`:''}</div>`;
 }
 // round 0: every step the cut takes (review.py cut_steps, from the scripts' own reports), ticked as they finish
 function cutHtml(c){
   const cl=c.claude||{},head=c.state==='failed'?'The cut stopped. '+(c.error||'')
-    :c.state==='queued'?(cl.opened?'Claude is working on this video in its own Terminal window.':cl.command?'To make this video, run this in a new Terminal window:':'Waiting for Claude to pick this up.')
-    :(cl.opened?'Claude is working on this video in its own Terminal window. ':'Claude is making the cut. ')+'Your clip plays meanwhile. Notes you leave now go on the cut.';
+    :c.state==='queued'?(cl.opened?'Codex is working on this video in its own Terminal window.':cl.command?'To make this video, run this in a new Terminal window:':'Waiting for Codex to pick this up.')
+    :(cl.opened?'Codex is working on this video in its own Terminal window. ':'Codex is making the cut. ')+'Your clip plays meanwhile. Notes you leave now go on the cut.';
   const li=c.steps.map(x=>`<li class="${x.state==='done'?'ok':x.state}"><span class="ic">${x.state==='done'?TICK:x.state==='now'&&c.state==='taken'?SPIN:'<i></i>'}</span>${esc(x.text)}</li>`).join('');
-  return `<div class="claude"><div><b>Claude</b><p>${esc(head)}</p>${c.state==='queued'&&!cl.opened&&cl.command?`<code class="cmd">${esc(cl.command)}</code>`:''}</div><ol class="steps">${li}</ol></div>`;
+  return `<div class="claude"><div><b>Codex</b><p>${esc(head)}</p>${c.state==='queued'&&!cl.opened&&cl.command?`<code class="cmd">${esc(cl.command)}</code>`:''}</div><ol class="steps">${li}</ol></div>`;
 }
-// a rule Claude saved from a note or the Teach panel: "Saved to <style>: <rule>. Undo" (Undo only for a rule this save added)
+// a rule Codex saved from a note or the Teach panel: "Saved to <style>: <rule>. Undo" (Undo only for a rule this save added)
 function rcptHtml(id){
   const r=(S.receipts||[]).find(x=>x.id===id);if(!r)return '';
   if(r.undone)return `<div class="rcpt off">Removed from ${esc(r.style)}: ${esc(r.rule)}.</div>`;
   return `<div class="rcpt">${TICK}<span>${r.status==='added'?'Saved to':'Already in'} ${esc(r.style)}: ${esc(r.rule)}.${r.status==='added'?` <button data-undo="${r.id}">Undo</button>`:''}</span></div>`;
 }
-// the final approve: Claude's rules from this video's notes, each ticked, into the style on Update
+// the final approve: Codex's rules from this video's notes, each ticked, into the style on Update
 let untick=new Set(),introOff=false,sureBack=null;
 // a moment on one round at the same words on another (both cut transcripts list the same words), else the same time
 function mapT(t,from,to){
@@ -979,7 +980,7 @@ function learnHtml(){
   const L=S.learn;if(!L)return '';const head=`<b>${`Teach ${!L.style||L.style==='My style'?'your style':esc(L.style)} from this video`}</b>`;   // own style: "your style"; a creator's: its name
   const say={none:'No notes this time. Your style stays as it is.',empty:'Nothing in your notes was about the style. It stays as it is.',skipped:'Not saved. Your style stays as it is.'}[L.state];
   if(say)return `<div class="learn">${head}<p>${say}</p></div>`;
-  if(L.state==='reading')return `<div class="learn">${head}<p class="wait"><i></i>Claude is reading your notes...</p></div>`;
+  if(L.state==='reading')return `<div class="learn">${head}<p class="wait"><i></i>Codex is reading your notes...</p></div>`;
   const open=L.state==='proposed',rs=(L.rules||[]).map((r,i)=>[r,i]).filter(([,i])=>open||L.chosen.includes(i));
   const rows='<div class="lrules">'+rs.map(([r,i])=>`<label class="lrule${open&&untick.has(i)?' off':''}"><input type="checkbox" data-li="${i}"${open&&untick.has(i)?'':' checked'}${open?'':' disabled'}><span>${esc(r.rule)}.</span></label>`).join('')+'</div>';
   if(open)return `<div class="learn"><div>${head}<p>From your notes. Untick anything it should not keep.</p></div>${rows}
@@ -990,7 +991,7 @@ function learnHtml(){
   return `<div class="learn">${head}${rows}<p class="ok">${TICK}${esc(L.summary||'Saved.')}</p></div>`;
 }
 const EDIT_STEPS={captions:'Writing the captions',visuals:'Finding the visuals',plan:'Planning zooms, cards and sound',render:'Making the video'};
-function makeState(){   // the edit's steps from Claude's status reports (review.py EDIT_STEPS); nothing made up
+function makeState(){   // the edit's steps from Codex's status reports (review.py EDIT_STEPS); nothing made up
   const steps=(S.making&&S.making.steps)||EDIT_STEPS,keys=Object.keys(steps),act=(S.activity||[]).filter(x=>x.round===S.round);
   const ev=[...S.events].reverse().find(e=>e.type==='approve'&&(e.stage==='cut'||e.stills)),at=ev&&ev.at;
   const mine=act.filter(x=>x.step&&keys.includes(x.step)&&(!at||x.at>=at)),last=mine[mine.length-1];
@@ -998,8 +999,8 @@ function makeState(){   // the edit's steps from Claude's status reports (review
   const pct=!land&&last&&!last.done&&last.step==='render'&&last.pct!=null?last.pct:null;
   const frac=cur<0?0:Math.min(1,(cur+(closed?1:pct!=null?pct/100:.5))/keys.length);
   const left='';   // no time estimates on a step
-  const alive=S.busy||!!(open&&open.log_age!=null&&open.log_age<120);   // a step is open only while Claude reports or its render log moves
-  const idle=!alive?'No word from Claude for a while. If it stopped, go back to Claude and say go on.':'';
+  const alive=S.busy||!!(open&&open.log_age!=null&&open.log_age<120);   // a step is open only while Codex reports or its render log moves
+  const idle=!alive?'No word from Codex for a while. If it stopped, go back to Codex and say go on.':'';
   return {steps,keys,cur,closed,pct,frac,at,left,idle,style:(S.making&&S.making.style)||'',
     now:open?open.text:cur>=0?steps[keys[cur]]:'Starting',extra:open&&!open.step?open.text:''};
 }
@@ -1007,7 +1008,7 @@ function renderMaking(){
   const on=!!S&&(approving||makingEdit()||landing===1||landing===3)&&isCur();
   document.body.classList.toggle('making',on);if(!on)return;
   const m=makeState(),ready=landing===1||landing===3,el=$('making');
-  if(m.idle&&!ready&&!approving){el.innerHTML=`<div class="mk"><div><b>Claude is not working on the edit</b><p>${esc(m.idle)} Your ${S.stills?'preview is':'cut is'} approved and saved.</p></div></div>`;return}
+  if(m.idle&&!ready&&!approving){el.innerHTML=`<div class="mk"><div><b>Codex is not working on the edit</b><p>${esc(m.idle)} Your ${S.stills?'preview is':'cut is'} approved and saved.</p></div></div>`;return}
   const pc=ready?100:Math.max(3,Math.round(m.frac*100)),since=m.at?dur((Date.now()-new Date(m.at))/1000):'0s';
   el.innerHTML=`<div class="mk${ready?' ready':''}"><div><b>${landing===3?'The preview is ready':ready?'The edit is ready':'Making the edit'}</b><p>Captions, zooms and sound${m.style?' in '+esc(m.style):''}</p></div>
     <em role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pc}"><i style="width:${pc}%"></i></em>
@@ -1041,7 +1042,7 @@ function renderList(){
   const SK=(S.skills||[]).filter(x=>!/^ai-editor:/.test(x.skill)||x.state==='now');   // the editor's own steps only while they run
   if(isCur()&&SK.length)h+=`<div class="skrow"><span class="skl">Skills</span>${SK.map(x=>`<span class="sk ${x.state}" title="${x.state==='done'?'ran on this video':x.state==='now'?'running now':'runs later'}">${x.state==='done'?'&#10003; ':x.state==='now'?'<i></i>':''}/${esc(x.skill.replace(/^ai-editor:/,''))}</span>`).join('')}</div>`;
   const cc=view.stage==='cut'&&S.cutcheck&&!data().transcript?' <a href="/cut-check.html" target="_blank" rel="noopener">See the transcript with every cut word struck through.</a>':'';
-  const also=[...(vr.changed||[]).map(text=>({t:null,text})),...(data().changes||[])].map(c=>({...c,text:plainText(c.text)})).filter(c=>c.text);   // check output never shows   // Claude's own lines, then what the files say
+  const also=[...(vr.changed||[]).map(text=>({t:null,text})),...(data().changes||[])].map(c=>({...c,text:plainText(c.text)})).filter(c=>c.text);   // check output never shows   // Codex's own lines, then what the files say
   if(prev.length||also.length||vr.back_to){
     const todo=prev.filter(c=>!c.checked||c.status==='wontfix'),done=prev.filter(c=>c.checked&&c.status!=='wontfix'),wf=workedFor(vr);
     h+=`<div class="chhead"><b>Changed in this draft</b>${wf?`<span class="since">Worked for ${wf}</span>`:''}</div>`;
@@ -1051,10 +1052,10 @@ function renderList(){
     h+=also.map(c=>`<button class="chg" ${c.t!=null?`data-t="${c.t}" title="jump to ${fmt(c.t)}"`:'tabindex="-1"'}>${c.t!=null?`<span class="tchip num">${fmt(c.t)}</span>`:''}<span>${esc(c.text)}</span></button>`).join('');
     if(vr.note&&!vr.back_to)h+=`<div class="sum"><p>${esc(vr.note)}</p></div>`;
     if(mine.length)h+=`<p class="sub">Your notes on ${dn(viewRound())}</p>`;
-  }else if((vr.note||cc)&&!(isCur()&&p==='send'))h+=`<div class="claude"><div><b>Claude</b><p>${esc(vr.note||'')}${cc}</p></div></div>`;
+  }else if((vr.note||cc)&&!(isCur()&&p==='send'))h+=`<div class="claude"><div><b>Codex</b><p>${esc(vr.note||'')}${cc}</p></div></div>`;
   h+=mine.map(noteHtml).join('');
-  if(mine.length&&isCur()&&!p)h+=`<p class="unsent">${plural(mine.length,'note')} not sent yet. Press Submit feedback to Claude when you are done.</p>`;
-  if(!mine.length&&!prev.length&&!(S.raw&&isCur())&&!(isCur()&&(makingEdit()||p==='approve')))h+=isCur()?'<div class="empty"><b>Your feedback</b>Pause where something is off and type what to change below. Each note is pinned to that moment. Claude sees nothing until you press Submit feedback to Claude.</div>':'<p class="empty2">No notes on this draft.</p>';
+  if(mine.length&&isCur()&&!p)h+=`<p class="unsent">${plural(mine.length,'note')} not sent yet. Press Salvar feedback when you are done.</p>`;
+  if(!mine.length&&!prev.length&&!(S.raw&&isCur())&&!(isCur()&&(makingEdit()||p==='approve')))h+=isCur()?'<div class="empty"><b>Your feedback</b>Pause where something is off and type what to change below. Each note is pinned to that moment. Salve as notas e avise no chat do Codex: leia meu feedback.</div>':'<p class="empty2">No notes on this draft.</p>';
   if(!mine.length&&prev.length&&isCur()&&!p)h+=`<p class="empty2">No notes on ${dn(viewRound())} yet. Pause where something is off and leave a note.</p>`;
   if(isCur()&&S.made&&S.stage==='edit'&&!S.stills&&view.stage==='edit')h+=`<p class="since made">${esc(S.made)}</p>`;
   if(isCur())h+=workHtml();
@@ -1062,7 +1063,7 @@ function renderList(){
   if(queued.length)h+=`<p class="sub">${S.raw?'For the cut':'For the next draft'}</p>`+queued.map(noteHtml).join('');
   const l=$('list'),keepScroll=l.scrollTop,atEnd=l.scrollHeight-keepScroll-l.clientHeight<40,hadFocus=document.activeElement&&document.activeElement.classList.contains('edta');
   const hadLearn=!!l.querySelector('.learn'),newP=p!==renderList.p;renderList.p=p;
-  // with Claude: open at the work panel at the bottom, then stay where the user scrolled (status lines re-render this)
+  // with Codex: open at the work panel at the bottom, then stay where the user scrolled (status lines re-render this)
   l.innerHTML=h;l.scrollTop=isCur()&&p&&!editing&&(atEnd||newP)?l.scrollHeight:keepScroll;
   const lp=l.querySelector('.learn');if(lp&&!hadLearn)lp.scrollIntoView({block:'end'});
   const ea=$('list').querySelector('.edta');
@@ -1073,22 +1074,22 @@ function renderList(){
 }
 setInterval(()=>{if(document.body.classList.contains('making')&&!landing)renderMaking()},1000);
 setInterval(()=>{document.querySelectorAll('[data-since]').forEach(e=>e.textContent='Working for '+dur((Date.now()-new Date(e.dataset.since))/1000))},1000);
-// ---- the Trial reels tab (review.py trials --propose): after a reel is approved, Claude plans re-cuts that each look
-// like a different video. The user picks one or more types per version (or lets Claude decide), asks Claude for more,
-// and presses Make. Claude picks the lines, sections, hooks and overlays itself.
+// ---- the Trial reels tab (review.py trials --propose): after a reel is approved, Codex plans re-cuts that each look
+// like a different video. The user picks one or more types per version (or lets Codex decide), asks Codex for more,
+// and presses Make. Codex picks the lines, sections, hooks and overlays itself.
 const TRK={hooks:['New hooks','A different first line.'],same:['Same order','From the top, a line or two dropped.'],
   rewind:['Rewind','Opens on a later line, then cuts back to the start.'],section:['One section','One part, with its own hook and ending.'],
   animations:['New animations','New motion graphics and cards.']};
 const DOWN='<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 let TR=null,trV=-1,trMenu=null,trAsk='',trOpened=-1;
-const kindLab=ks=>ks[0]==='claude'?'Let Claude decide':ks.map(k=>TRK[k][0]).join(' + ');
+const kindLab=ks=>ks[0]==='claude'?'Let Codex decide':ks.map(k=>TRK[k][0]).join(' + ');
 function trSync(){const t=S.trials;if(t.v===trV)return;trV=t.v;trMenu=null;
   TR={versions:t.versions.map(v=>({kinds:[...v.kinds],k0:v.kinds.join(),line:v.line})),hooks:new Set(t.hooks.map((h,i)=>i)),idea:!!t.idea}}
 function trMaking(){const t=S.trials;return t&&t.state==='chosen'?t.picks.versions.map((v,i)=>'t'+(i+1)):[]}
 function trLab(x){const t=S.trials,m=/^t(\d+)$/.exec(x),v=t&&m&&(t.picks||t).versions[m[1]-1];return v?x+' · '+kindLab(v.kinds):lab(x)}
 function trialsHtml(){
   const t=S.trials;trSync();
-  const say=(x,cls)=>`<div class="claude"><div><b>Claude</b><p>${esc(x)}</p></div></div>`;
+  const say=(x,cls)=>`<div class="claude"><div><b>Codex</b><p>${esc(x)}</p></div></div>`;
   let h=t.message?say(t.message):'';
   h+=(t.asks||[]).map(q=>`<div class="trq">${esc(q.text)}</div>`+(q.reply?say(q.reply):'')).join('');
   if(t.state==='skipped')return h+'<p class="empty2">Skipped. No trial reels for this one.</p>';
@@ -1099,24 +1100,24 @@ function trialsHtml(){
       <p class="empty2">Each one lands in the Version menu above the video as it renders.</p></div>`;
   }
   const off=!isCur()||t.handled===false;
-  if(t.handled===false)h+='<p class="trwait"><i></i>Claude is reading your question...</p>';
+  if(t.handled===false)h+='<p class="trwait"><i></i>Codex is reading your question...</p>';
   if(t.hooks.length)h+=`<div class="trhooks"><div class="trh">Spare hooks</div>${t.hooks.map((x,i)=>`<label class="lrule trhook"><input type="checkbox" data-trhook="${i}"${TR.hooks.has(i)?' checked':''}${off?' disabled':''}><span>"${esc(x.text)}"${x.from?`<small>${esc(x.from)}</small>`:''}</span></label>`).join('')}</div>`;
-  h+=`<div class="trvs"><div class="trh">Versions<button data-trall${off?' disabled':''}>Let Claude decide all</button></div>`;
+  h+=`<div class="trvs"><div class="trh">Versions<button data-trall${off?' disabled':''}>Let Codex decide all</button></div>`;
   TR.versions.forEach((v,i)=>{
-    const line=v.line&&v.kinds.join()===v.k0?v.line:v.kinds[0]==='claude'?'Claude picks the mix that looks most different.':'Claude picks the details when it makes it.';
+    const line=v.line&&v.kinds.join()===v.k0?v.line:v.kinds[0]==='claude'?'Codex picks the mix that looks most different.':'Codex picks the details when it makes it.';
     h+=`<div class="trv"><div class="row"><span class="tn">t${i+1}</span><button class="trsel" data-trk="${i}"${off?' disabled':''}><span>${esc(kindLab(v.kinds))}</span>${DOWN}</button></div><div class="ln">${esc(line)}</div>${trMenu===i?trMenuHtml(v,i):''}</div>`;
-    if(v.idea&&t.idea)h+=`<div class="tridea"><span>Claude suggests: <b>${esc(kindLab(t.idea.kinds))}.</b> ${esc(t.idea.line)}</span><div class="trbtns"><button class="go" data-truse="${i}">Use this</button><button data-tranother="${i}">Another idea</button></div></div>`;
+    if(v.idea&&t.idea)h+=`<div class="tridea"><span>Codex suggests: <b>${esc(kindLab(t.idea.kinds))}.</b> ${esc(t.idea.line)}</span><div class="trbtns"><button class="go" data-truse="${i}">Use this</button><button data-tranother="${i}">Another idea</button></div></div>`;
   });
   if(TR.versions.length<8&&!off)h+='<button class="tradd" data-tradd>+ Add a version</button>';
   h+='</div>';
   const n=TR.versions.length;
-  h+=`<div class="trfoot"><div class="trask"><textarea class="trta" rows="2" placeholder="Ask Claude for more hooks, another section, a different order..."${off?' disabled':''}></textarea><button data-trsend aria-label="send to Claude"${off?' disabled':''}><svg width="13" height="13" viewBox="0 0 14 14"><path d="M7 12V2M3 6l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+  h+=`<div class="trfoot"><div class="trask"><textarea class="trta" rows="2" placeholder="Ask Codex for more hooks, another section, a different order..."${off?' disabled':''}></textarea><button data-trsend aria-label="send to Codex"${off?' disabled':''}><svg width="13" height="13" viewBox="0 0 14 14"><path d="M7 12V2M3 6l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
     <button class="go" data-trmake${off||!n?' disabled':''}>Make ${plural(n,'trial reel')}</button><button class="skip" data-trskip${off?' disabled':''}>Skip trial reels</button></div>`;
   return h;
 }
 function trMenuHtml(v,i){
   const c=v.kinds[0]==='claude',on=k=>v.kinds.includes(k),dis=k=>k==='same'&&on('rewind')||k==='rewind'&&on('same');
-  return `<div class="trmenu" role="menu"><button class="${c?'on':''}" data-trpick="claude"><i class="rd"></i><span><b>Let Claude decide</b><small>Claude picks the mix that makes this one look most different.</small></span></button><hr><div class="lab">Or pick one or more</div>`
+  return `<div class="trmenu" role="menu"><button class="${c?'on':''}" data-trpick="claude"><i class="rd"></i><span><b>Let Codex decide</b><small>Codex picks the mix that makes this one look most different.</small></span></button><hr><div class="lab">Or pick one or more</div>`
     +Object.keys(TRK).map(k=>`<button class="${on(k)?'on':''}" data-trpick="${k}"${dis(k)?' disabled title="Same order and Rewind both set the order"':''}><i></i><span><b>${TRK[k][0]}</b><small>${dis(k)?'Off while '+(k==='same'?'Rewind':'Same order')+' is on: both set the order.':TRK[k][1]}</small></span></button>`).join('')
     +(TR.versions.length>1?`<hr><button class="rm" data-trrm="${i}"><span><b>Remove t${i+1}</b></span></button>`:'')+'</div>';
 }
@@ -1166,7 +1167,7 @@ async function saveEdit(){const c=S.comments.find(c=>c.id===editing.id);if(!c){e
 function editFiles(fs){[...fs].filter(f=>/^image\/(png|jpeg|gif|webp)$/.test(f.type)).slice(0,6-editing.images.length).forEach(f=>{const r=new FileReader();r.onload=()=>{if(editing){editing.images.push(r.result);renderList()}};r.readAsDataURL(f)})}
 $('editpic').onchange=e=>{if(editing)editFiles(e.target.files);e.target.value=''};
 $('list').addEventListener('change',async e=>{const kb=e.target.closest('[data-keep]');
-  if(kb){const r=await fetch('/keep',{method:'POST',body:JSON.stringify({id:+kb.dataset.keep,keep:kb.checked})});if(!r.ok)alert('This note is with Claude now.');return load(true)}
+  if(kb){const r=await fetch('/keep',{method:'POST',body:JSON.stringify({id:+kb.dataset.keep,keep:kb.checked})});if(!r.ok)alert('This note is with Codex now.');return load(true)}
   const cb=e.target.closest('[data-li]');if(!cb)return;
   cb.checked?untick.delete(+cb.dataset.li):untick.add(+cb.dataset.li);renderList()});
 $('introx').onclick=()=>{introOff=true;document.body.classList.remove('intro');post('/intro',{})};
@@ -1208,7 +1209,7 @@ $('pins').addEventListener('pointerdown',e=>{const b=e.target.closest('.pin');if
 
 
 // ---- the transcript beside the player: the whole take, cut words struck, removed pauses as chips, and each of
-// Claude's cuts flagged with its reason (a spans.json kind, or the pause trim). On the current cut round it edits:
+// Codex's cuts flagged with its reason (a spans.json kind, or the pause trim). On the current cut round it edits:
 // drag across words for the pill (Restore / Copy / Cut); a flag's tick keeps that cut, its cross brings it back.
 // Changes wait in PEND until Apply (POST /edits); Cmd+Z undoes the last one. Preview plays the raw take skipping
 // every cut range. Read only on older rounds and on the edit (the last cut round's transcript).
@@ -1289,13 +1290,13 @@ function renderTools(){
   const ed=txEditable(),p=pending(),n=nChanges();let h;
   if(view.stage==='edit')h=isCur()&&p==='approve'?'<p>Approved. Words are read only now.</p>':'<p>Read only on the edit. To change a word, leave a note.</p>';
   else if(!isCur())h='<p>An older draft, read only.</p>';
-  else if(p==='send')h='<p>Claude is working on this draft. Words can change again in the next draft.</p>';
+  else if(p==='send')h='<p>Codex is working on this draft. Words can change again in the next draft.</p>';
   else if(p==='approve')h='<p>The cut is approved. Words are read only now.</p>';
   else if(n)h=`<b class="num" title="not applied yet">${plural(n,'change')}</b><button class="pbtn" data-undo title="Cmd+Z">Undo</button><button class="pbtn" data-discard>Discard</button>`;
   else if(HIST.length)h='<button class="pbtn" data-undo title="Cmd+Z">Undo</button>';   // an Accept all, or one tick
   else h=txSeen()?'<p></p>':'<p>Select words to cut or restore them.</p>';
   if(canPreview()&&(ed||previewOn))h+=`<button class="pbtn${previewOn?' on':''}" data-preview>${previewOn?'Back to the cut':'Play your changes'}</button>`;
-  const nf=ed&&p!=='send'&&p!=='approve'?$('txlines').querySelectorAll('[data-acc]').length:0;   // Claude's suggested cuts still showing
+  const nf=ed&&p!=='send'&&p!=='approve'?$('txlines').querySelectorAll('[data-acc]').length:0;   // Codex's suggested cuts still showing
   if(ed&&p!=='send'&&p!=='approve'&&ACK.size&&!nf)h+=`<button class="pbtn" data-unack title="the flagged cuts you kept show again, to bring any back">Show ${plural(ACK.size,'suggestion')} again</button>`;
   if(nf>1)h+=`<button class="pbtn" data-accall title="keep every flagged cut and shortened pause">Accept all ${nf} suggestions</button>`;
   if(ed&&n)h+='<button class="pbtn go" data-apply>Apply</button>';
@@ -1514,7 +1515,7 @@ const grow=()=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};
 ta.addEventListener('input',()=>{grow();boxTime()});
 ta.addEventListener('focus',()=>v.pause());
 // Anything to add?: links (pages, X posts, YouTube, GitHub, docs) and images for this video, saved at once into
-// assets.json (POST /assets). Claude puts them in first, on the "Show when I say..." words.
+// assets.json (POST /assets). Codex puts them in first, on the "Show when I say..." words.
 const LINKIC='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>';
 const CLIPIC='<svg width="16" height="16" viewBox="0 0 16 16"><path d="M13 7.5l-5.3 5.3a3.2 3.2 0 01-4.5-4.5l5.6-5.6a2.1 2.1 0 013 3l-5.5 5.5a1 1 0 01-1.5-1.5L9.9 4.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
 let addOpen=false,addMsg='',addSig='';
@@ -1562,7 +1563,7 @@ document.addEventListener('keydown',e=>{
   const typing=e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT'||e.target.tagName==='SELECT';
   if(!typing&&(e.metaKey||e.ctrlKey)&&!e.altKey&&!e.shiftKey&&e.key.toLowerCase()==='z'&&txEditable()&&HIST.length){e.preventDefault();return txUndo()}
   if(!typing&&(e.key==='Backspace'||e.key==='Delete')&&txSel&&txEditable()){e.preventDefault();return txOp('cut')}
-  if(typing||e.target.isContentEditable||e.target.closest?.('#askq')||document.documentElement.dataset.askOpen||e.metaKey||e.ctrlKey||e.altKey)return;const k=e.key;   // never while typing or while Claude's question is up
+  if(typing||e.target.isContentEditable||e.target.closest?.('#askq')||document.documentElement.dataset.askOpen||e.metaKey||e.ctrlKey||e.altKey)return;const k=e.key;   // never while typing or while Codex's question is up
   if(k===' '){e.preventDefault();toggle()}
   else if(k==='j')v.currentTime-=5;else if(k==='l')v.currentTime+=5;
   else if(k==='ArrowLeft'){e.preventDefault();v.currentTime-=1}else if(k==='ArrowRight'){e.preventDefault();v.currentTime+=1}
