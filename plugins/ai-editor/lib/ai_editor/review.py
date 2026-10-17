@@ -113,6 +113,7 @@ sys.path.insert(1, str(Path(__file__).resolve().parent.parent))   # `from ai_edi
 import askhook  # noqa: E402
 import assets  # noqa: E402
 import live  # noqa: E402
+from codex_feedback import queue_feedback
 
 HTML = Path(__file__).with_name("review.html")
 LOCK = threading.RLock()   # re-entrant: /edits holds it across apply_edits and update
@@ -1400,10 +1401,13 @@ def make_handler(folder, token):
                 style = style_label(folder) if body["type"] == "approve" else None
 
                 def ev(d):
+                    if os.environ.get("CODEX_THREAD_ID") and d.get("sent"):
+                        return False
                     if d.get("sent") and d["events"] and d["events"][-1]["type"] == "edits":
                         return False   # Claude is applying transcript changes: Stop first
+                    delivered = queue_feedback(folder, d, body["type"])
                     d["events"].append({"type": body["type"], "stage": d["stage"], "round": d["round"],
-                                        "at": now(), "handled": False, **({"stills": True} if d.get("stills") else {})})
+                                        "at": now(), "handled": delivered, **({"stills": True} if d.get("stills") else {})})
                     d["sent"] = True
                     d.pop("stopped", None)
                     if body["type"] == "approve" and (d["stage"] == "edit" and not d.get("stills") or d.get("final")):   # the finished video
@@ -1411,8 +1415,12 @@ def make_handler(folder, token):
                     elif body["type"] == "approve" and d["stage"] == "cut":
                         prepared_steps(folder, d)
                     return True
-                if not update(rj, ev):
-                    return self.send(409, {"error": "Claude is applying your transcript changes."})
+                try:
+                    accepted = update(rj, ev)
+                except RuntimeError as exc:
+                    return self.send(502, {"error": str(exc)})
+                if not accepted:
+                    return self.send(409, {"error": "Esta versão já foi enviada. Aguarde ou use Parar."})
                 if body["type"] == "send" and load(rj).get("stills"):   # notes on the stills: that render is not the one
                     drop_spec(folder)
                 return self.send(200, {})

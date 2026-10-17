@@ -525,7 +525,6 @@ body.making #making{display:flex}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style></head><body>
-<aside style="padding:10px 18px;background:var(--bg,#f4f4f4);color:var(--fg,#222);font:14px system-ui;border-bottom:1px solid #aaa">Revisão com Codex: use <b>Salvar feedback</b> e depois escreva <b>leia meu feedback</b> neste chat. Esta página não inicia mensagens no chat automaticamente.</aside>
 <nav class="rail" aria-label="cooked.">
  <div class="rtop"><span class="rtile" title="cooked."><svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><path d="M6 36H46C46 46 40 52 32 52H20C12 52 6 46 6 36Z" fill="currentColor"/><path d="M45 36H58A3 3 0 0 1 58 42H45Z" fill="currentColor"/><path d="M16 29C13 25 19 22 16 17M26 29C23 25 29 22 26 17M36 29C33 25 39 22 36 17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span><span class="rname">cooked.</span>
   <button class="rtog" id="railtog" aria-label="Expand the sidebar" title="Expand the sidebar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16M13 10l2 2-2 2"/></svg></button></div>
@@ -550,7 +549,7 @@ body.making #making{display:flex}
 </header>
 <section id="how" aria-label="how this works"><ol>
  <li><b>1. Watch and note</b>Pause where something is off and leave a note. It is pinned to that moment, with the frame. On the edit, click a card, caption or zoom on the video, or select words in the transcript, and the note starts with what it is. Paste or drop an image to show what you mean.</li>
- <li><b>2. Salvar feedback</b>As notas ficam salvas nesta revisão. Depois de salvar, volte ao chat do Codex e escreva: leia meu feedback. O botão não envia uma mensagem automaticamente ao chat.</li>
+ <li><b>2. Enviar ao Codex</b>Adicione suas notas e clique em Enviar ao Codex para encaminhá-las ao chat desta revisão.</li>
  <li><b>3. Approve</b>When it is right, approve it. An approved cut gets captions, zooms and sound next. An approved edit is finished, and your notes can teach your style.</li>
 </ol><div id="keys"></div></section>
 
@@ -602,7 +601,7 @@ body.making #making{display:flex}
    <div class="crow"><button id="clock" title="the note is saved at the playhead. i and o mark a range; click to clear it."><svg width="13" height="13" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 4v3.2l2 1.3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span id="boxat" class="num">0:00.0</span></button>
     <button id="picbtn" aria-label="attach an image" title="attach an image (or paste or drop one)"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M13 7.5l-5.3 5.3a3.2 3.2 0 01-4.5-4.5l5.6-5.6a2.1 2.1 0 013 3l-5.5 5.5a1 1 0 01-1.5-1.5L9.9 4.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
     <select id="scope" aria-label="which videos the note is for"></select>
-    <button id="savebtn" aria-label="save note" title="save note (enter)"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 12V2M3 6l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+    <button id="savebtn" aria-label="Enviar nota ao Codex" title="Enviar nota ao Codex (Enter)"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M7 12V2M3 6l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
   <div class="actions"><a id="dl" href="/download" download hidden><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download</a><button id="send"><i></i><span></span></button><button id="approve"></button></div>
  </div>
 </aside>
@@ -794,7 +793,7 @@ function listenText(S){
   const first=!(S.rounds||[]).some(r=>r.stage===S.stage&&r.round>=1&&r.round<S.round&&!r.stills);   // the first video of the cut or the edit (the stills before it are not one)
   if(S.listening)return S.round>1&&!S.comments.some(c=>c.stage===S.stage&&c.round===S.round)?(first?(S.stage==='edit'?(S.stills?'The preview is ready':'The edit is ready'):'The cut is ready'):cap(dn(S))+' is ready'):'Codex is listening';
   if(S.busy)return 'Codex is working. Notes you send now are next.';
-  return 'Notas salvas localmente. Avise neste chat do Codex para aplicar o feedback.';
+  return 'Adicione notas e envie ao Codex.';
 }
 function render(){
   if(!S)return;
@@ -811,7 +810,7 @@ function render(){
   // Send is primary while there are notes; once a round lands with none, Approve is. Stop replaces Send while Codex works.
   const sb=$('send'),ap=$('approve'),working=p==='send'||makingEdit();
   const undoAp=isCur()&&!S.raw&&lastEv&&lastEv.type==='approve';   // an approve can always be taken back
-  sb.classList.toggle('stop',working);sb.querySelector('span').textContent=undoAp?(makingEdit()?'Stop and undo approve':'Undo approve'):working?(S.raw?'Making the cut':'Stop'):mine?`Salvar feedback (${mine})`:'Salvar feedback';
+  sb.classList.toggle('stop',working);sb.querySelector('span').textContent=undoAp?(makingEdit()?'Stop and undo approve':'Undo approve'):working?(S.raw?'Making the cut':'Stop'):mine?`Enviar ao Codex (${mine})`:'Enviar ao Codex';
   sb.className=S.raw?'primary':(mine&&live&&!working?'primary':'')+(working?' stop':'');   // while Codex works nothing is primary: Stop stays quiet
   sb.disabled=undoAp?false:working?!isCur()||!!S.raw:(!live||!mine);
   sb.title=undoAp?'Go back: this draft opens for notes again.':working?(S.raw?'the first cut is on its way':makingEdit()?'Stop making the edit. The cut opens again.':'Stop Codex working on this draft. Your notes open again.'):'';
@@ -945,7 +944,7 @@ function workHtml(){
   if(S.raw&&S.cut_steps)return cutHtml(S.cut_steps);
   if(p!=='send'&&(!live||S.stage==='cut'))return '';   // the cut is ready: what Codex does next is the edit's prep, not this round
   const ed=editsSent()?S.events[S.events.length-1]:null,nch=ed?plural(ed.n,'transcript change'):'';
-  const head=S.raw?'Making the cut. Your clip plays meanwhile. Notes you leave now go on the cut.':ed?(act.length?`Codex is applying your changes (${nch}). The next draft opens here.`:picked?`Codex has your ${nch} and is starting ${nextDn()}.`:S.listening||S.busy?`${nch} saved. Waiting for Codex to pick them up.`:`${nch} saved, but Codex is not listening. Volte ao chat do Codex e escreva: leia meu feedback.`):p==='send'?(act.length?`Making ${nextDn()}.`:picked?`Codex has your notes and is starting ${nextDn()}.`:'Feedback salvo. Volte ao chat do Codex e escreva: leia meu feedback.'+(S.listening||!S.busy?'':' Codex is finishing something and takes them next.')):'Still coming in this draft:';
+  const head=S.raw?'Making the cut. Your clip plays meanwhile. Notes you leave now go on the cut.':ed?(act.length?`Codex is applying your changes (${nch}). The next draft opens here.`:picked?`Codex has your ${nch} and is starting ${nextDn()}.`:S.listening||S.busy?`${nch} saved. Waiting for Codex to pick them up.`:`${nch} saved, but Codex is not listening. Aguardando o Codex.`):p==='send'?(act.length?`Making ${nextDn()}.`:picked?`Codex has your notes and is starting ${nextDn()}.`:'Feedback enviado ao Codex.'+(S.listening||!S.busy?'':' Codex is finishing something and takes them next.')):'Still coming in this draft:';
   if(p!=='send'&&!ed&&!S.raw&&!act.some(x=>x.step||x.pct!=null))   // the draft is out: a plain line from Codex is a remark, not work still coming
     return `<div class="claude"><div><b>Codex</b>${act.map(x=>`<p>${esc(x.text)}</p>`).join('')}</div></div>`;
   const li=act.map(x=>x.done?`<li><span class="ic">${TICK}</span>${esc(x.text)}</li>`
@@ -1054,7 +1053,7 @@ function renderList(){
     if(mine.length)h+=`<p class="sub">Your notes on ${dn(viewRound())}</p>`;
   }else if((vr.note||cc)&&!(isCur()&&p==='send'))h+=`<div class="claude"><div><b>Codex</b><p>${esc(vr.note||'')}${cc}</p></div></div>`;
   h+=mine.map(noteHtml).join('');
-  if(mine.length&&isCur()&&!p)h+=`<p class="unsent">${plural(mine.length,'note')} not sent yet. Press Salvar feedback when you are done.</p>`;
+  if(mine.length&&isCur()&&!p)h+=`<p class="unsent">${plural(mine.length,'note')} not sent yet. Press Enviar ao Codex when you are done.</p>`;
   if(!mine.length&&!prev.length&&!(S.raw&&isCur())&&!(isCur()&&(makingEdit()||p==='approve')))h+=isCur()?'<div class="empty"><b>Your feedback</b>Pause where something is off and type what to change below. Each note is pinned to that moment. Salve as notas e avise no chat do Codex: leia meu feedback.</div>':'<p class="empty2">No notes on this draft.</p>';
   if(!mine.length&&prev.length&&isCur()&&!p)h+=`<p class="empty2">No notes on ${dn(viewRound())} yet. Pause where something is off and leave a note.</p>`;
   if(isCur()&&S.made&&S.stage==='edit'&&!S.stills&&view.stage==='edit')h+=`<p class="since made">${esc(S.made)}</p>`;
@@ -1551,10 +1550,24 @@ box.addEventListener('dragover',e=>{e.preventDefault();if(!ta.disabled)box.class
 box.addEventListener('drop',e=>{e.preventDefault();box.classList.remove('drag');if(!ta.disabled)addFiles(e.dataTransfer.files)});
 async function save(){const text=ta.value.trim();if(ta.disabled||(!text&&!pics.length))return;
   const[t,te]=noteSpan(),nv=(viewRound().alts||[]).length;
-  await post('/comment',{t,t_end:te,text,images:pics,alt:nv&&$('scope').value==='*'?'*':alt||null,on:noteOn});closeBox();await load()}
-$('savebtn').onclick=save;
-ta.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();save()}if(e.key==='Escape'){ta.blur();inT=outT=null;noteOn=null;renderBar();boxTime()}});
-const sendOrStop=async()=>{const e=S.events[S.events.length-1];await post('/event',{type:pending()==='send'||makingEdit()||e&&e.type==='approve'?'stop':'send'});load()};
+  const r=await fetch('/comment',{method:'POST',body:JSON.stringify({t,t_end:te,text,images:pics,alt:nv&&$('scope').value==='*'?'*':alt||null,on:noteOn})});if(!r.ok)throw new Error('Não foi possível salvar a nota. Seu texto foi preservado.');closeBox();await load()}
+async function submitNote(){try{await save();if(!S.sent)await sendOrStop()}catch(e){alert(e.message)}}
+$('savebtn').onclick=submitNote;
+ta.addEventListener('keydown',async e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();await submitNote()}if(e.key==='Escape'){ta.blur();inT=outT=null;noteOn=null;renderBar();boxTime()}});
+let sendingFeedback=false;
+const sendOrStop=async()=>{
+  if(sendingFeedback)return;
+  sendingFeedback=true;
+  try{
+    const e=S.events[S.events.length-1];
+    const type=pending()==='send'||makingEdit()||e&&e.type==='approve'?'stop':'send';
+    if(type==='send'&&(ta.value.trim()||pics.length))await save();
+    const r=await fetch('/event',{method:'POST',body:JSON.stringify({type})});
+    const result=await r.json();
+    if(!r.ok)throw new Error(result.error||'Não foi possível enviar. Suas notas estão salvas.');
+    await load();
+  }catch(e){alert(e.message)}finally{sendingFeedback=false}
+};
 $('send').onclick=sendOrStop;$('msend').onclick=sendOrStop;
 const approve=async()=>{if(S.stage==='cut'&&!S.final||S.stills){approving=true;render()}   // instant: the button and the steps turn before the server answers
   try{await post('/event',{type:'approve'});await load(true)}catch(e){}finally{approving=false;render()}};
